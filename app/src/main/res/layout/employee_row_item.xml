@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="employee"
+            type="com.haythamayyash.mstarttask.common.model.Employee" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#dbdbdb"
+        android:paddingBottom="16dp">
+
+        <View
+            android:id="@+id/view_id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#1473ff"
+            app:layout_constraintBottom_toBottomOf="@id/textView_idLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView_idLabel" />
+
+        <TextView
+            android:id="@+id/textView_idLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="8dp"
+            android:text="@string/id"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/id_label_color"
+            app:layout_constraintEnd_toStartOf="@id/textView_idValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_idValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{employee.id + ``}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/id_value_color"
+            app:layout_constraintBottom_toBottomOf="@id/textView_idLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView_idLabel"
+            app:layout_constraintTop_toTopOf="@id/textView_idLabel"
+            tools:text="12345" />
+
+        <TextView
+            android:id="@+id/textView_createdOnLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/created_on"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintEnd_toStartOf="@id/textView_createdOnValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_id" />
+
+        <TextView
+            android:id="@+id/textView_createdOnValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintBottom_toBottomOf="@id/textView_createdOnLabel"
+            app:layout_constraintEnd_toEndOf="@id/imageView_personalImage"
+            app:layout_constraintStart_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toTopOf="@id/textView_createdOnLabel"
+            tools:text="15/5/2020" />
+
+        <TextView
+            android:id="@+id/textView_employeeNameLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/employee_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintEnd_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintStart_toStartOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toBottomOf="@id/textView_createdOnLabel" />
+
+        <TextView
+            android:id="@+id/textView_employeeNameValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{employee.firstName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintBottom_toBottomOf="@id/textView_employeeNameLabel"
+            app:layout_constraintEnd_toEndOf="@id/textView_createdOnValue"
+            app:layout_constraintStart_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toTopOf="@id/textView_employeeNameLabel"
+            tools:text="Haytham" />
+
+        <TextView
+            android:id="@+id/textView_addressLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/address"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintEnd_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintStart_toStartOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toBottomOf="@id/textView_employeeNameLabel" />
+
+        <TextView
+            android:id="@+id/textView_addressValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{employee.address}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintBottom_toBottomOf="@id/textView_addressLabel"
+            app:layout_constraintEnd_toEndOf="@id/textView_createdOnValue"
+            app:layout_constraintStart_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toTopOf="@id/textView_addressLabel"
+            tools:text="Amman" />
+
+        <TextView
+            android:id="@+id/textView_emailLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/email"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintStart_toStartOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toBottomOf="@id/textView_addressLabel" />
+
+        <TextView
+            android:id="@+id/textView_emailLabelValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{employee.email}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/label_color"
+            app:layout_constraintBottom_toBottomOf="@id/textView_emailLabel"
+            app:layout_constraintEnd_toEndOf="@id/textView_createdOnValue"
+            app:layout_constraintStart_toEndOf="@id/textView_createdOnLabel"
+            app:layout_constraintTop_toTopOf="@id/textView_emailLabel"
+            tools:text="haytham@gmal.com" />
+
+        <ImageView
+            android:id="@+id/imageView_personalImage"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_emailLabelValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView_createdOnValue"
+            app:layout_constraintTop_toTopOf="@id/textView_createdOnValue"
+            tools:src="@android:drawable/alert_dark_frame" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
