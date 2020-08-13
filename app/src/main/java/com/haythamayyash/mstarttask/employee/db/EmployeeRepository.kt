@@ -20,7 +20,11 @@ class EmployeeRepository(
 
     suspend fun getEmployeeList(pageSize: Int): List<Employee> {
         val employeeList = employeeDao.getEmployeeList(lastId, pageSize)
-        lastId = employeeList.last().id
+        lastId = try {
+            employeeList.last().id
+        } catch (e: NoSuchElementException) {
+            -1
+        }
         return employeeList
     }
 

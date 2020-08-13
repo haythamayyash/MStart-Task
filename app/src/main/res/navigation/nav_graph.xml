@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/employeeFragment">
+
+    <fragment
+        android:id="@+id/employeeFragment"
+        android:name="com.haythamayyash.mstarttask.employee.view.EmployeeFragment"
+        android:label="EmployeeFragment"
+        tools:layout="@layout/fragment_employee">
+
+        <action
+            android:id="@+id/action_employeeFragment_to_addEmployeeFragment"
+            app:destination="@id/addEmployeeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEmployeeFragment"
+        android:name="com.haythamayyash.mstarttask.employee.view.AddEmployeeFragment"
+        android:label="AddEmployeeFragment"
+        tools:layout="@layout/fragment_add_employee" />
+</navigation>

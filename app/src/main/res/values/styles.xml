@@ -9,7 +9,11 @@
     </style>
 
     <style name="editTextStyle">
-        <item name="android:background">#fff</item>
         <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="listTextViewStyle">
+        <item name="android:textColor">@color/label_color</item>
+        <item name="android:textSize">15sp</item>
     </style>
 </resources>

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.haythamayyash.mstarttask.R
 import com.haythamayyash.mstarttask.common.db.DataBaseManager
 import com.haythamayyash.mstarttask.databinding.FragmentEmployeeBinding
@@ -42,8 +43,10 @@ class EmployeeFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, factory).get(EmployeeViewModel::class.java)
         employeeAdapter = EmployeeAdapter()
+        binding.viewModel = viewModel
         binding.recyclerViewEmployee.adapter = employeeAdapter
         observeGetEmployee()
+        observeNavigateTo()
         viewModel?.getEmployee()
         return binding.root
     }
@@ -51,6 +54,12 @@ class EmployeeFragment : Fragment() {
     private fun observeGetEmployee() {
         viewModel?.employeeLiveData?.observe(viewLifecycleOwner, Observer {
             employeeAdapter?.refresh(it)
+        })
+    }
+
+    private fun observeNavigateTo() {
+        viewModel?.navigateTo?.observe(viewLifecycleOwner, Observer {
+            findNavController().navigate(it)
         })
     }
 }

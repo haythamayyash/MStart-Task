@@ -16,7 +16,7 @@ class EmployeeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         const val TYPE_PROGRESS: Int = 0
     }
 
-    private var employeeList: MutableList<Employee>? = null
+    private val employeeList: MutableList<Employee> by lazy { mutableListOf<Employee>() }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -50,6 +50,10 @@ class EmployeeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         } else {
             holder as ProgressViewHolder
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if ((position == itemCount - 1)) TYPE_PROGRESS else TYPE_ITEM
     }
 
     fun refresh(employeeList: List<Employee>) {
