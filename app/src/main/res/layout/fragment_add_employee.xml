@@ -15,8 +15,12 @@
 
         <ScrollView
             android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -156,6 +160,7 @@
                         android:text="@={viewModel.address}"
                         android:textSize="@dimen/edit_text_font_size" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_departmentName"
                     android:layout_width="0dp"
@@ -175,19 +180,46 @@
                         android:textSize="@dimen/edit_text_font_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <ImageButton
+                    android:id="@+id/imageButton_attachImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/tintColor"
+                    android:onClick="@{() -> viewModel.onAttachImageClick()}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_input_departmentName"
+                    app:srcCompat="@drawable/ic_attach_file_24" />
+
+                <TextView
+                    android:id="@+id/textView_attacheImage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onAttachImageClick()}"
+                    android:text="Attach your image"
+                    app:layout_constraintBottom_toBottomOf="@id/imageButton_attachImage"
+                    app:layout_constraintStart_toEndOf="@id/imageButton_attachImage"
+                    app:layout_constraintTop_toTopOf="@id/imageButton_attachImage" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/tintColor"
+                    android:onClick="@{() -> viewModel.onSaveClick()}"
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageButton_attachImage" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/tintColor"
-            android:text="@string/save"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:onClick="@{() -> viewModel.onSaveClick()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

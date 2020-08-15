@@ -8,15 +8,21 @@ import com.haythamayyash.mstarttask.common.model.Department
 import com.haythamayyash.mstarttask.common.model.Employee
 
 @Dao
-interface EmployeeDao {
+abstract class EmployeeDao {
     @Query("SELECT * FROM Employee WHERE ID > :lastId LIMIT :pageSize")
-    suspend fun getEmployeeList(lastId: Long, pageSize: Int): List<Employee>
+    abstract suspend fun getEmployeeList(lastId: Long, pageSize: Int): List<Employee>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertEmployee(employee: Employee)
+    suspend fun insertEmployee(employee: Employee, department: Department) {
+        employee.departmentId = department.id
+        insert(employee)
+    }
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insert(employee: Employee)
 
     @Query("DELETE FROM Employee WHERE ID = :id ")
-    suspend fun deleteEmployee(id: Int)
+    abstract suspend fun deleteEmployee(id: Int)
 
 
 }

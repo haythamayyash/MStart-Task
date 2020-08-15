@@ -17,7 +17,7 @@ class Department {
     var serverDateTime: Long = 0
 
     @ColumnInfo(name = "DateTime_UTC")
-    var dateTime_UTC: Long = 0
+    var dateTimeUTC: Long = 0
 
     @ColumnInfo(name = "Update_DateTime_UTC")
     var updateDateTimeUTC: Long = 0

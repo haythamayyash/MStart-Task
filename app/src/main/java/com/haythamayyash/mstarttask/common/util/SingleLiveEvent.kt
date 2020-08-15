@@ -1,4 +1,4 @@
-package com.haythamayyash.mstarttask.common.Util
+package com.haythamayyash.mstarttask.common.util
 
 
 import android.util.Log

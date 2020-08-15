@@ -5,17 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.haythamayyash.mstarttask.R
-import com.haythamayyash.mstarttask.common.Util.SingleLiveEvent
 import com.haythamayyash.mstarttask.common.model.Department
 import com.haythamayyash.mstarttask.common.model.Employee
+import com.haythamayyash.mstarttask.common.util.SingleLiveEvent
 import com.haythamayyash.mstarttask.employee.db.EmployeeRepository
 import kotlinx.coroutines.launch
 
 class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : ViewModel() {
     val employeeLiveData: MutableLiveData<List<Employee>> by lazy { MutableLiveData<List<Employee>>() }
     val navigateTo: SingleLiveEvent<Int> by lazy { SingleLiveEvent<Int>() }
-    fun insertEmployee(employee: Employee) = viewModelScope.launch {
-        employeeRepository.insertEmployee(employee)
+
+    fun insertEmployee(employee: Employee, department: Department) = viewModelScope.launch {
+        employeeRepository.insertEmployee(employee, department)
     }
 
     fun deleteEmployee(id: Int) = viewModelScope.launch {
@@ -40,6 +41,10 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
 
     fun onAddEmployeeClick() {
         navigateTo.postValue(R.id.action_employeeFragment_to_addEmployeeFragment)
+    }
+
+    fun reset() {
+        employeeRepository.reset()
     }
 
     class Factory(

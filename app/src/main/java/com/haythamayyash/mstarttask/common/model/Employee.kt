@@ -18,7 +18,7 @@ class Employee {
         childColumns = ["Department_ID"],
         onDelete = ForeignKey.NO_ACTION
     )
-    var departmentId: Int = 0
+    var departmentId: Long = 0
 
     @ColumnInfo(name = "Server_Date_Time")
     var serverDateTime: Long = 0
@@ -50,6 +50,10 @@ class Employee {
     @ColumnInfo(name = "Address")
     var address: String = ""
 
-    @ColumnInfo(name = "Photo", typeAffinity = ColumnInfo.BLOB)
-    var photo: ByteArray? = null
+    /**
+     * Since Blob is not recommended and cause problems and crashes when the image is big ,
+     * i use the uri image instead
+     */
+    @ColumnInfo(name = "Photo")
+    var photo: String? = null
 }

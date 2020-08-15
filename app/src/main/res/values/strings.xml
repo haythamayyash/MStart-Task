@@ -14,4 +14,7 @@
     <string name="enter_password_again">Re-Enter password</string>
     <string name="save">Save</string>
     <string name="department_name">Department Name</string>
+    <string name="required_field">Required Field</string>
+    <string name="passwords_not_match">Passwrods Not Match</string>
+    <string name="added_successfully">Added Successfully</string>
 </resources>
