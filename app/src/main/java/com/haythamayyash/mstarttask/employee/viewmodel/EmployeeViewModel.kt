@@ -4,44 +4,37 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.haythamayyash.mstarttask.R
-import com.haythamayyash.mstarttask.common.model.Department
+import com.haythamayyash.mstarttask.common.Constants
 import com.haythamayyash.mstarttask.common.model.Employee
 import com.haythamayyash.mstarttask.common.util.SingleLiveEvent
 import com.haythamayyash.mstarttask.employee.db.EmployeeRepository
 import kotlinx.coroutines.launch
 
+@Suppress("UNCHECKED_CAST")
 class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : ViewModel() {
     val employeeLiveData: MutableLiveData<List<Employee>> by lazy { MutableLiveData<List<Employee>>() }
-    val navigateTo: SingleLiveEvent<Int> by lazy { SingleLiveEvent<Int>() }
+    val employeeCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    val navigateToInsertEmployee: SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
+    val navigateToUpdateEmployee: SingleLiveEvent<Employee> by lazy { SingleLiveEvent<Employee>() }
 
-    fun insertEmployee(employee: Employee, department: Department) = viewModelScope.launch {
-        employeeRepository.insertEmployee(employee, department)
+    fun deleteEmployees(idList: List<Long>) = viewModelScope.launch {
+        employeeRepository.deleteEmployees(idList)
     }
 
-    fun deleteEmployee(id: Int) = viewModelScope.launch {
-        employeeRepository.deleteEmployee(id)
-    }
 
     fun getEmployee(pageSize: Int = 10) = viewModelScope.launch {
         employeeLiveData.value = employeeRepository.getEmployeeList(pageSize)
-    }
-
-    fun insertDepartment(department: Department) = viewModelScope.launch {
-        employeeRepository.insertDepartment(department)
-    }
-
-    fun deleteDepartment(id: Int) = viewModelScope.launch {
-        employeeRepository.deleteDepartment(id)
-    }
-
-    fun getDepartmentList(id: Long) = viewModelScope.launch {
-        employeeRepository.getDepartment(id)
+        employeeCountLiveData.value = employeeRepository.getEmployeeCount()
     }
 
     fun onAddEmployeeClick() {
-        navigateTo.postValue(R.id.action_employeeFragment_to_addEmployeeFragment)
+        navigateToInsertEmployee.postValue(Constants.INSERT)
     }
+
+    fun onItemListClick(employee: Employee) {
+        navigateToUpdateEmployee.postValue(employee)
+    }
+
 
     fun reset() {
         employeeRepository.reset()

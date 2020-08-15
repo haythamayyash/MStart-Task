@@ -17,4 +17,8 @@
     <string name="required_field">Required Field</string>
     <string name="passwords_not_match">Passwrods Not Match</string>
     <string name="added_successfully">Added Successfully</string>
+    <string name="attach_your_image">Attach your image</string>
+    <string name="delete">Delete</string>
+    <string name="items_deleted_message">Selected items deleted</string>
+    <string name="personal_image">Personal Image</string>
 </resources>

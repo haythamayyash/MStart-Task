@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 class Department {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
     var id: Long = 0
 

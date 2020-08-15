@@ -2,7 +2,6 @@ package com.haythamayyash.mstarttask.employee.view
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -16,23 +15,37 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.haythamayyash.mstarttask.R
+import com.haythamayyash.mstarttask.common.Constants
 import com.haythamayyash.mstarttask.common.db.DataBaseManager
+import com.haythamayyash.mstarttask.common.model.Employee
 import com.haythamayyash.mstarttask.common.util.TimeManager
 import com.haythamayyash.mstarttask.databinding.FragmentAddEmployeeBinding
 import com.haythamayyash.mstarttask.employee.db.EmployeeRepository
 import com.haythamayyash.mstarttask.employee.viewmodel.AddEmployeeViewModel
 import java.io.FileNotFoundException
-import java.io.InputStream
 
 
 class AddEmployeeFragment : Fragment() {
     companion object {
-        private val RESULT_LOAD_IMAGE: Int = 0
-        private val TAG: String = "AddEmployeeFragment"
+        private const val RESULT_LOAD_IMAGE: Int = 0
+        private const val TAG: String = "AddEmployeeFragment"
     }
+
+
+    private var addEmployeeAction: String? = null
+    private var employee: Employee? = null
 
     private lateinit var binding: FragmentAddEmployeeBinding
     private var viewModel: AddEmployeeViewModel? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        addEmployeeAction = arguments?.get(Constants.ADD_EMPLOYEE_ACTION) as? String?
+        employee = arguments?.get(Constants.INTENT_EMPLOYEE) as? Employee?
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,12 +59,14 @@ class AddEmployeeFragment : Fragment() {
         val factory = AddEmployeeViewModel.Factory(
             EmployeeRepository(
                 DataBaseManager.getInstance(requireContext()).employeeDao(),
-                DataBaseManager.getInstance(requireContext()).departmentDao(),
                 TimeManager()
             )
         )
         viewModel = ViewModelProvider(this, factory).get(AddEmployeeViewModel::class.java)
+        viewModel?.addEmployeeAction = addEmployeeAction
+        viewModel?.employee = employee
         binding.viewModel = viewModel
+        binding.invalidateAll()
         observeFirstNameError()
         observeLastNameError()
         observeEmailError()
@@ -137,9 +152,9 @@ class AddEmployeeFragment : Fragment() {
                 val path = imageUri?.path ?: ""
                 binding.textViewAttacheImage.text = path
                 Log.d(TAG, imageUri.toString())
-                val imageStream: InputStream? =
-                    imageUri?.let { context?.contentResolver?.openInputStream(it) }
-                val selectedImage = BitmapFactory.decodeStream(imageStream)
+//                val imageStream: InputStream? =
+//                    imageUri?.let { context?.contentResolver?.openInputStream(it) }
+//                val selectedImage = BitmapFactory.decodeStream(imageStream)
                 viewModel?.personalImage = path
 //                image_view.setImageBitmap(selectedImage)
             } catch (e: FileNotFoundException) {

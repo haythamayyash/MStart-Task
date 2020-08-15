@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.haythamayyash.mstarttask.R
+import com.haythamayyash.mstarttask.common.Constants
 import com.haythamayyash.mstarttask.common.MyApplication
 import com.haythamayyash.mstarttask.common.model.Department
 import com.haythamayyash.mstarttask.common.model.Employee
@@ -14,8 +15,36 @@ import kotlinx.coroutines.launch
 
 @Suppress("UNCHECKED_CAST")
 class AddEmployeeViewModel(private val employeeRepository: EmployeeRepository) : ViewModel() {
+    var addEmployeeAction: String? = Constants.INSERT
+    var employee: Employee? = null
+        set(value) {
+            field = value
+            if (employee?.firstName?.isNotEmpty() == true) {
+                firstName = employee?.firstName ?: ""
+            }
+            if (employee?.lastName?.isNotEmpty() == true) {
+                lastName = employee?.lastName ?: ""
+            }
+            if (employee?.email?.isNotEmpty() == true) {
+                email = employee?.email ?: ""
+            }
+            if (employee?.mobileNumber?.isNotEmpty() == true) {
+                mobileNumber = employee?.mobileNumber ?: ""
+            }
+            if (employee?.password?.isNotEmpty() == true) {
+                password = ""
+            }
+            if (employee?.address?.isNotEmpty() == true) {
+                address = employee?.address ?: ""
+            }
+            viewModelScope.launch {
+                val department: Department? =
+                    employeeRepository.getDepartment(employee?.departmentId ?: 0)
+                departmentName = department?.name ?: ""
+            }
+        }
     var personalImage: String? = null
-    var firstName: String = ""
+    var firstName: String = employee?.firstName ?: ""
     var lastName: String = ""
     var email: String = ""
     var mobileNumber: String = ""
@@ -38,15 +67,21 @@ class AddEmployeeViewModel(private val employeeRepository: EmployeeRepository) :
         if (validateFields()) {
             val department = Department()
             department.name = departmentName
-            val employee = Employee()
-            employee.firstName = firstName
-            employee.lastName = lastName
-            employee.email = email
-            employee.mobileNumber = mobileNumber
-            employee.password = password
-            employee.address = address
-            employee.photo = personalImage?.let { personalImage }
-            employeeRepository.insertEmployee(employee, department)
+            employee = Employee()
+            employee?.firstName = firstName
+            employee?.lastName = lastName
+            employee?.email = email
+            employee?.mobileNumber = mobileNumber
+            employee?.password = password
+            employee?.address = address
+            employee?.photo = personalImage?.let { personalImage }
+            if (employee != null) {
+                if (addEmployeeAction == Constants.INSERT) {
+                    employeeRepository.insertEmployee(employee!!, department)
+                } else {
+                    employeeRepository.updateEmployee(employee!!, department)
+                }
+            }
             navigateBack.postValue(true)
         }
     }

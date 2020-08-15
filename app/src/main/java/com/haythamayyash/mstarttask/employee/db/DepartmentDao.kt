@@ -11,10 +11,5 @@ interface DepartmentDao {
     @Query("SELECT * FROM Department WHERE ID = :id ")
     suspend fun getDepartment(id: Long): Department
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDepartment(department: Department)
-
-    @Query("DELETE FROM Department WHERE ID = :id ")
-    suspend fun deleteDepartment(id: Int)
 
 }

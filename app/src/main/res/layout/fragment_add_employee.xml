@@ -41,6 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/first_name"
+                        android:inputType="textPersonName"
                         android:text="@={viewModel.firstName}"
                         android:textSize="@dimen/edit_text_font_size" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/last_name"
+                        android:inputType="textPersonName"
                         android:text="@={viewModel.lastName}"
                         android:textSize="@dimen/edit_text_font_size" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
+                        android:inputType="textEmailAddress"
                         android:text="@={viewModel.email}"
                         android:textSize="@dimen/edit_text_font_size" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +141,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_password_again"
+                        android:inputType="textPassword"
                         android:text="@={viewModel.reEnterPassword}"
                         android:textSize="@dimen/edit_text_font_size" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -186,6 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/tintColor"
+                    android:contentDescription="@string/attach_your_image"
                     android:onClick="@{() -> viewModel.onAttachImageClick()}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
@@ -200,7 +205,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:onClick="@{() -> viewModel.onAttachImageClick()}"
-                    android:text="Attach your image"
+                    android:text="@string/attach_your_image"
                     app:layout_constraintBottom_toBottomOf="@id/imageButton_attachImage"
                     app:layout_constraintStart_toEndOf="@id/imageButton_attachImage"
                     app:layout_constraintTop_toTopOf="@id/imageButton_attachImage" />

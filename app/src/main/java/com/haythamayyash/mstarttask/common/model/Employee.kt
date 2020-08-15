@@ -1,12 +1,14 @@
 package com.haythamayyash.mstarttask.common.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity
-class Employee {
+class Employee() : Parcelable {
     @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
@@ -56,4 +58,50 @@ class Employee {
      */
     @ColumnInfo(name = "Photo")
     var photo: String? = null
+
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readLong()
+        departmentId = parcel.readLong()
+        serverDateTime = parcel.readLong()
+        dateTimeUTC = parcel.readLong()
+        updateDateTimeUTC = parcel.readLong()
+        firstName = parcel.readString().toString()
+        lastName = parcel.readString().toString()
+        email = parcel.readString().toString()
+        mobileNumber = parcel.readString().toString()
+        password = parcel.readString().toString()
+        gender = parcel.readString().toString()
+        address = parcel.readString().toString()
+        photo = parcel.readString()
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeLong(id)
+        parcel.writeLong(departmentId)
+        parcel.writeLong(serverDateTime)
+        parcel.writeLong(dateTimeUTC)
+        parcel.writeLong(updateDateTimeUTC)
+        parcel.writeString(firstName)
+        parcel.writeString(lastName)
+        parcel.writeString(email)
+        parcel.writeString(mobileNumber)
+        parcel.writeString(password)
+        parcel.writeString(gender)
+        parcel.writeString(address)
+        parcel.writeString(photo)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Employee> {
+        override fun createFromParcel(parcel: Parcel): Employee {
+            return Employee(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Employee?> {
+            return arrayOfNulls(size)
+        }
+    }
 }
