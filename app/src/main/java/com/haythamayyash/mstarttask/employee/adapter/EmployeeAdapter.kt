@@ -28,7 +28,7 @@ class EmployeeAdapter(val viewModel: EmployeeViewModel?, val timeManager: TimeMa
     var total: Int = 0
     private val employeeList: MutableList<Employee> by lazy { mutableListOf<Employee>() }
     var multiSelect = false
-    val selectedItems = mutableListOf<Long>()
+    private val selectedItems = mutableListOf<Long>()
     val selectedItemsPosition = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -124,7 +124,7 @@ class EmployeeAdapter(val viewModel: EmployeeViewModel?, val timeManager: TimeMa
 
     inner class EmployeeViewHolder(private val itemBinding: EmployeeRowItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        var mPosition: Int = 0
+        private var mPosition: Int = 0
 
         init {
             itemBinding.root.setOnLongClickListener {
@@ -150,7 +150,7 @@ class EmployeeAdapter(val viewModel: EmployeeViewModel?, val timeManager: TimeMa
             itemBinding.employee = employee
             itemBinding.viewModel = viewModel
             itemBinding.textViewCreatedOnValue.text = timeManager.formatDate(
-                timeManager.getLocalTime(employee?.serverDateTime ?: 0),
+                employee?.serverDateTime ?: 0,
                 "yyyy/MM/dd"
             )
             val file = File(employee?.photo ?: "")

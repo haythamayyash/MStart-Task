@@ -19,17 +19,17 @@ class EmployeeRepository(
     suspend fun insertEmployee(employee: Employee, department: Department) =
         withContext(Dispatchers.IO) {
             employee.serverDateTime = Calendar.getInstance().timeInMillis
-            employee.dateTimeUTC = timeManager.getUtcTime(Calendar.getInstance().timeInMillis)
+            employee.dateTimeUTC = timeManager.getUtcTime()
             department.serverDateTime = Calendar.getInstance().timeInMillis
-            department.dateTimeUTC = timeManager.getUtcTime(Calendar.getInstance().timeInMillis)
+            department.dateTimeUTC = timeManager.getUtcTime()
             employeeDao.insertEmployee(employee, department)
         }
 
     suspend fun updateEmployee(employee: Employee, department: Department) =
         withContext(Dispatchers.IO) {
-            employee.updateDateTimeUTC = timeManager.getUtcTime(Calendar.getInstance().timeInMillis)
+            employee.updateDateTimeUTC = timeManager.getUtcTime()
             department.serverDateTime = Calendar.getInstance().timeInMillis
-            department.dateTimeUTC = timeManager.getUtcTime(Calendar.getInstance().timeInMillis)
+            department.dateTimeUTC = timeManager.getUtcTime()
             employeeDao.updateEmployee(employee, department)
         }
     suspend fun deleteEmployees(idList: List<Long>) = withContext(Dispatchers.IO) {
